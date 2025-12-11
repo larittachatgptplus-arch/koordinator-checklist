@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laritta - Checklist Koordinator Area</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #D94A38;
+            --primary-dark: #B83828;
+            --secondary: #2C5F4F;
+            --accent: #F4A261;
+            --bg-light: #FAF9F6;
+            --bg-white: #FFFFFF;
+            --text-dark: #1A1A1A;
+            --text-gray: #6B7280;
+            --border: #E5E7EB;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, var(--bg-light) 0%, #FFF5F0 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 20px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-lg);
+            border-radius: 0 0 24px 24px;
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            color: white;
+        }
+
+        .logo-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            margin: 0 auto 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .login-card {
+            background: var(--bg-white);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 15px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: all 0.3s ease;
+            background: var(--bg-white);
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(217, 74, 56, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(217, 74, 56, 0.3);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .welcome-message {
+            background: linear-gradient(135deg, var(--secondary) 0%, #1e4a3c 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .welcome-message h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .welcome-message p {
+            opacity: 0.9;
+            font-size: 15px;
+        }
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-box {
+            background: var(--bg-white);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 2px solid var(--border);
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .task-card {
+            background: var(--bg-white);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 20px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .task-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .task-header {
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .task-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .task-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .badge-priority {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .badge-deadline {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .badge-category {
+            background: #E0E7FF;
+            color: #3730A3;
+        }
+
+        .task-description {
+            color: var(--text-gray);
+            margin: 16px 0;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .store-list {
+            margin-top: 20px;
+        }
+
+        .store-list-header {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .store-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            margin: 8px 0;
+            background: linear-gradient(135deg, #FFF 0%, var(--bg-light) 100%);
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .store-item:hover {
+            border-color: var(--success);
+            background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+        }
+
+        .store-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .store-code {
+            background: var(--primary);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .store-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 15px;
+        }
+
+        .check-button {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+
+        .check-button:hover {
+            transform: scale(1.1);
+            border-color: var(--success);
+        }
+
+        .check-button.checked {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .check-button.checked::after {
+            content: '✓';
+            color: white;
+            font-weight: 700;
+            font-size: 24px;
+        }
+
+        .completion-time {
+            font-size: 12px;
+            color: var(--success);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-gray);
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .empty-state-text {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            margin-top: 24px;
+            background: var(--text-gray);
+        }
+
+        .logout-btn:hover {
+            background: var(--text-dark);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .task-card {
+            animation: fadeIn 0.4s ease;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 12px;
+            }
+
+            header {
+                padding: 24px 16px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .login-card {
+                padding: 28px 20px;
+            }
+
+            .task-card {
+                padding: 20px;
+            }
+
+            .task-title {
+                font-size: 18px;
+            }
+
+            .stats-bar {
+                grid-template-columns: 1fr;
+            }
+
+            .store-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .check-button {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-icon">L</div>
+            <h1>Koordinator Area Checklist</h1>
+            <div class="subtitle">Laritta Bakery</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Login Section -->
+        <div id="loginSection">
+            <div class="login-card">
+                <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 8px; text-align: center;">Selamat Datang</h2>
+                <p style="color: var(--text-gray); text-align: center; margin-bottom: 32px;">Silakan pilih nama Anda untuk melanjutkan</p>
+                
+                <div class="form-group">
+                    <label>Pilih Koordinator Area</label>
+                    <select id="coordinatorSelect">
+                        <option value="">-- Pilih Nama Anda --</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" onclick="login()">
+                    🔓 Masuk
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Section -->
+        <div id="mainSection" class="hidden">
+            <div class="welcome-message">
+                <h2 id="welcomeName">Selamat Datang!</h2>
+                <p id="welcomeArea"></p>
+                <p id="welcomeStores" style="margin-top: 4px; font-size: 13px;"></p>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-box">
+                    <div class="stat-value" id="completedCount">0</div>
+                    <div class="stat-label">Tugas Selesai</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="pendingCount">0</div>
+                    <div class="stat-label">Tugas Pending</div>
+                </div>
+            </div>
+
+            <div id="taskList"></div>
+
+            <button class="btn logout-btn" onclick="logout()">
+                🚪 Keluar
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Data will be synced from manager system
+        const TASKS_URL = 'https://larittachatgptplus-arch.github.io/koordinator-checklist/tasks.json';
+        
+        let currentCoordinator = null;
+        let tasks = [];
+        let coordinators = [];
+        let stores = [];
+
+        // Load data from manager system (localStorage for now)
+        function loadData() {
+            // These will be synced from the manager system
+            tasks = JSON.parse(localStorage.getItem('laritta_tasks')) || [];
+            coordinators = JSON.parse(localStorage.getItem('laritta_coordinators')) || [];
+            stores = JSON.parse(localStorage.getItem('laritta_stores')) || [];
+            
+            // Populate coordinator dropdown
+            const select = document.getElementById('coordinatorSelect');
+            select.innerHTML = '<option value="">-- Pilih Nama Anda --</option>';
+            coordinators.forEach(coord => {
+                const option = document.createElement('option');
+                option.value = coord.id;
+                option.textContent = `${coord.name} - ${coord.area}`;
+                select.appendChild(option);
+            });
+        }
+
+        function login() {
+            const coordId = parseInt(document.getElementById('coordinatorSelect').value);
+            if (!coordId) {
+                alert('Silakan pilih nama Anda terlebih dahulu!');
+                return;
+            }
+
+            currentCoordinator = coordinators.find(c => c.id === coordId);
+            if (!currentCoordinator) {
+                alert('Koordinator tidak ditemukan!');
+                return;
+            }
+
+            // Save login session
+            localStorage.setItem('current_coordinator', coordId);
+
+            // Show main section
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('mainSection').classList.remove('hidden');
+
+            // Update welcome message
+            document.getElementById('welcomeName').textContent = `Halo, ${currentCoordinator.name}! 👋`;
+            document.getElementById('welcomeArea').textContent = `Area: ${currentCoordinator.area}`;
+            
+            const storeCount = currentCoordinator.stores ? currentCoordinator.stores.length : 0;
+            document.getElementById('welcomeStores').textContent = `Anda mengelola ${storeCount} toko`;
+
+            // Render tasks
+            renderTasks();
+        }
+
+        function logout() {
+            localStorage.removeItem('current_coordinator');
+            currentCoordinator = null;
+            document.getElementById('loginSection').classList.remove('hidden');
+            document.getElementById('mainSection').classList.add('hidden');
+            document.getElementById('coordinatorSelect').value = '';
+        }
+
+        function renderTasks() {
+            const container = document.getElementById('taskList');
+            
+            // Filter tasks for current coordinator
+            const myTasks = tasks.filter(task => 
+                task.status === 'active' && 
+                task.coordinators.some(c => c.id === currentCoordinator.id)
+            );
+
+            if (myTasks.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📋</div>
+                        <div class="empty-state-text">Belum ada tugas untuk Anda</div>
+                        <p style="margin-top: 8px; font-size: 14px;">Tugas baru akan muncul di sini</p>
+                    </div>
+                `;
+                updateStats();
+                return;
+            }
+
+            container.innerHTML = myTasks.map(task => {
+                const myData = task.coordinators.find(c => c.id === currentCoordinator.id);
+                const isChecked = myData.checked;
+                
+                // Get my stores for this task
+                const myStores = stores.filter(s => 
+                    currentCoordinator.stores && currentCoordinator.stores.includes(s.id)
+                );
+
+                const daysLeft = Math.ceil((new Date(task.deadline) - new Date()) / (1000 * 60 * 60 * 24));
+                const isOverdue = daysLeft < 0;
+
+                return `
+                    <div class="task-card">
+                        <div class="task-header">
+                            <div class="task-title">${task.title}</div>
+                            <div class="task-meta">
+                                <span class="badge badge-priority">${task.priority}</span>
+                                <span class="badge badge-deadline">
+                                    ⏰ ${formatDate(task.deadline)}
+                                    ${isOverdue ? ' - TERLAMBAT!' : ` (${daysLeft} hari lagi)`}
+                                </span>
+                                ${task.category ? `<span class="badge badge-category">${task.category}</span>` : ''}
+                            </div>
+                        </div>
+
+                        ${task.description ? `<div class="task-description">${task.description}</div>` : ''}
+
+                        <div class="store-list">
+                            <div class="store-list-header">
+                                🏪 Checklist Toko (${myStores.length} toko)
+                            </div>
+                            ${myStores.map(store => `
+                                <div class="store-item">
+                                    <div class="store-info">
+                                        <span class="store-code">${store.code}</span>
+                                        <div>
+                                            <div class="store-name">${store.name}</div>
+                                            ${isChecked ? `<div class="completion-time">✓ Selesai: ${formatDateTime(myData.checkedAt)}</div>` : ''}
+                                        </div>
+                                    </div>
+                                    <div class="check-button ${isChecked ? 'checked' : ''}" 
+                                         onclick="toggleCheck(${task.id})"
+                                         title="${isChecked ? 'Klik untuk uncheck' : 'Klik jika sudah dicek semua toko'}">
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        ${!isChecked ? `
+                            <button class="btn btn-success" onclick="toggleCheck(${task.id})" style="margin-top: 16px;">
+                                ✅ Tandai Semua Toko Sudah Dicek
+                            </button>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+
+            updateStats();
+        }
+
+        function toggleCheck(taskId) {
+            const task = tasks.find(t => t.id === taskId);
+            if (!task) return;
+
+            const myData = task.coordinators.find(c => c.id === currentCoordinator.id);
+            if (!myData) return;
+
+            // Toggle check status
+            myData.checked = !myData.checked;
+            myData.checkedAt = myData.checked ? new Date().toISOString() : null;
+
+            // Check if all coordinators completed
+            const allCompleted = task.coordinators.every(c => c.checked);
+            if (allCompleted) {
+                task.status = 'completed';
+                task.completedAt = new Date().toISOString();
+            } else {
+                task.status = 'active';
+            }
+
+            // Save to localStorage
+            localStorage.setItem('laritta_tasks', JSON.stringify(tasks));
+
+            // Re-render
+            renderTasks();
+
+            // Show feedback
+            if (myData.checked) {
+                showNotification('✅ Tugas berhasil ditandai selesai!');
+            } else {
+                showNotification('⚠️ Checklist dibatalkan');
+            }
+        }
+
+        function updateStats() {
+            const myTasks = tasks.filter(task => 
+                task.status === 'active' && 
+                task.coordinators.some(c => c.id === currentCoordinator.id)
+            );
+
+            const completed = myTasks.filter(task => {
+                const myData = task.coordinators.find(c => c.id === currentCoordinator.id);
+                return myData && myData.checked;
+            }).length;
+
+            const pending = myTasks.length - completed;
+
+            document.getElementById('completedCount').textContent = completed;
+            document.getElementById('pendingCount').textContent = pending;
+        }
+
+        function showNotification(message) {
+            // Simple notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--success);
+                color: white;
+                padding: 16px 24px;
+                border-radius: 12px;
+                box-shadow: var(--shadow-lg);
+                font-weight: 600;
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return date.toLocaleDateString('id-ID', options);
+        }
+
+        function formatDateTime(dateStr) {
+            if (!dateStr) return '';
+            const date = new Date(dateStr);
+            const options = { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            return date.toLocaleDateString('id-ID', options);
+        }
+
+        // Check for existing session
+        function checkSession() {
+            const savedCoordId = localStorage.getItem('current_coordinator');
+            if (savedCoordId) {
+                document.getElementById('coordinatorSelect').value = savedCoordId;
+                login();
+            }
+        }
+
+        // Initialize
+        window.onload = function() {
+            loadData();
+            checkSession();
+        };
+
+        // Add CSS animation for notification
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
