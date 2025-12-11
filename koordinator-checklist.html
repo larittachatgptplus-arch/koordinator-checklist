@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laritta - Checklist Koordinator Area</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #D94A38;
+            --primary-dark: #B83828;
+            --secondary: #2C5F4F;
+            --accent: #F4A261;
+            --bg-light: #FAF9F6;
+            --bg-white: #FFFFFF;
+            --text-dark: #1A1A1A;
+            --text-gray: #6B7280;
+            --border: #E5E7EB;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, var(--bg-light) 0%, #FFF5F0 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 32px 20px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-lg);
+            border-radius: 0 0 24px 24px;
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            color: white;
+        }
+
+        .logo-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            margin: 0 auto 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .login-card {
+            background: var(--bg-white);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 15px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: all 0.3s ease;
+            background: var(--bg-white);
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(217, 74, 56, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(217, 74, 56, 0.3);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .welcome-message {
+            background: linear-gradient(135deg, var(--secondary) 0%, #1e4a3c 100%);
+            color: white;
+            padding: 24px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .welcome-message h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .welcome-message p {
+            opacity: 0.9;
+            font-size: 15px;
+        }
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-box {
+            background: var(--bg-white);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 2px solid var(--border);
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .task-card {
+            background: var(--bg-white);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 20px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .task-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .task-header {
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .task-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .task-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .badge {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .badge-priority {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .badge-deadline {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .badge-category {
+            background: #E0E7FF;
+            color: #3730A3;
+        }
+
+        .badge-progress {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .badge-progress.complete {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .task-description {
+            color: var(--text-gray);
+            margin: 16px 0;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .store-list {
+            margin-top: 20px;
+        }
+
+        .store-list-header {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+
+        .store-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            margin: 8px 0;
+            background: linear-gradient(135deg, #FFF 0%, var(--bg-light) 100%);
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .store-item:hover {
+            border-color: var(--success);
+        }
+
+        .store-item.checked {
+            background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+            border-color: var(--success);
+        }
+
+        .store-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .store-code {
+            background: var(--primary);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .store-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 15px;
+        }
+
+        .check-button {
+            width: 48px;
+            height: 48px;
+            border: 3px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            flex-shrink: 0;
+        }
+
+        .check-button:hover {
+            transform: scale(1.1);
+            border-color: var(--success);
+        }
+
+        .check-button.checked {
+            background: var(--success);
+            border-color: var(--success);
+        }
+
+        .check-button.checked::after {
+            content: '✓';
+            color: white;
+            font-weight: 700;
+            font-size: 24px;
+        }
+
+        .completion-time {
+            font-size: 11px;
+            color: var(--success);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-gray);
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .empty-state-text {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .logout-btn {
+            margin-top: 24px;
+            background: var(--text-gray);
+        }
+
+        .logout-btn:hover {
+            background: var(--text-dark);
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            background: transparent;
+            color: var(--text-gray);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .tab-button:hover {
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .task-card {
+            animation: fadeIn 0.4s ease;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 12px;
+            }
+
+            header {
+                padding: 24px 16px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .login-card {
+                padding: 28px 20px;
+            }
+
+            .task-card {
+                padding: 20px;
+            }
+
+            .task-title {
+                font-size: 18px;
+            }
+
+            .stats-bar {
+                grid-template-columns: 1fr;
+            }
+
+            .store-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .check-button {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-icon">L</div>
+            <h1>Koordinator Area Checklist</h1>
+            <div class="subtitle">Laritta Bakery</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Login Section -->
+        <div id="loginSection">
+            <div class="login-card">
+                <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 8px; text-align: center;">Selamat Datang</h2>
+                <p style="color: var(--text-gray); text-align: center; margin-bottom: 32px;">Silakan pilih nama Anda untuk melanjutkan</p>
+                
+                <div class="form-group">
+                    <label>Pilih Koordinator Area</label>
+                    <select id="coordinatorSelect">
+                        <option value="">-- Pilih Nama Anda --</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" onclick="login()">
+                    🔓 Masuk
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Section -->
+        <div id="mainSection" class="hidden">
+            <div class="welcome-message">
+                <h2 id="welcomeName">Selamat Datang!</h2>
+                <p id="welcomeArea"></p>
+                <p id="welcomeStores" style="margin-top: 4px; font-size: 13px;"></p>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-box">
+                    <div class="stat-value" id="totalTasksCount">0</div>
+                    <div class="stat-label">Total Tugas</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="completedCount">0</div>
+                    <div class="stat-label">Selesai</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="pendingCount">0</div>
+                    <div class="stat-label">Pending</div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div style="display: flex; gap: 8px; margin-bottom: 24px; background: white; padding: 8px; border-radius: 16px; box-shadow: var(--shadow);">
+                <button class="tab-button active" onclick="switchTab('active')" id="tabActive">
+                    📋 Tugas Aktif
+                </button>
+                <button class="tab-button" onclick="switchTab('history')" id="tabHistory">
+                    📚 Riwayat
+                </button>
+            </div>
+
+            <!-- Active Tasks Tab -->
+            <div id="activeTasksTab">
+                <div id="taskList"></div>
+            </div>
+
+            <!-- History Tab -->
+            <div id="historyTab" class="hidden">
+                <div id="historyList"></div>
+            </div>
+
+            <button class="btn logout-btn" onclick="logout()">
+                🚪 Keluar
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentCoordinator = null;
+        let tasks = [];
+        let coordinators = [];
+        let stores = [];
+
+        // Load data from manager system (localStorage)
+        function loadData() {
+            // Default data if localStorage is empty
+            const defaultStores = [{"id": 1, "name": "Borobudur - Tangerang", "code": "TNG-001", "address": "Hub: Tangerang", "area": "Area 1 – Agus Budi Prayitno"}, {"id": 2, "name": "Merdeka - Tangerang", "code": "TNG-002", "address": "Hub: Tangerang", "area": "Area 1 – Agus Budi Prayitno"}, {"id": 3, "name": "Halim - Tangerang", "code": "TNG-003", "address": "Hub: Tangerang", "area": "Area 1 – Agus Budi Prayitno"}, {"id": 4, "name": "Poris - Tangerang", "code": "TNG-004", "address": "Hub: Tangerang", "area": "Area 1 – Agus Budi Prayitno"}, {"id": 5, "name": "Ciledug - Tangerang", "code": "TNG-005", "address": "Hub: Tangerang", "area": "Area 1 – Agus Budi Prayitno"}, {"id": 6, "name": "Periuk - Tangerang", "code": "TNG-006", "address": "Hub: Tangerang", "area": "Area 1 – Agus Budi Prayitno"}, {"id": 7, "name": "Graha Raya - Tangerang", "code": "TNG-007", "address": "Hub: Tangerang", "area": "Area 1 – Agus Budi Prayitno"}, {"id": 8, "name": "Nias", "code": "SBY-001", "address": "Hub: Surabaya Raya", "area": "Area 2 – Isa Yuhani"}, {"id": 9, "name": "Darmahusada", "code": "SBY-002", "address": "Hub: Surabaya Raya", "area": "Area 2 – Isa Yuhani"}, {"id": 10, "name": "Kutai", "code": "SBY-003", "address": "Hub: Surabaya Raya", "area": "Area 2 – Isa Yuhani"}, {"id": 11, "name": "Barata", "code": "SBY-004", "address": "Hub: Surabaya Raya", "area": "Area 2 – Isa Yuhani"}, {"id": 12, "name": "Ketintang", "code": "SBY-005", "address": "Hub: Surabaya Raya", "area": "Area 2 – Isa Yuhani"}, {"id": 13, "name": "Menganti - Gresik", "code": "SBY-006", "address": "Hub: Surabaya Raya", "area": "Area 2 – Isa Yuhani"}, {"id": 14, "name": "Wiyung", "code": "SBY-007", "address": "Hub: Surabaya Raya", "area": "Area 2 – Isa Yuhani"}, {"id": 15, "name": "ST.Gubeng", "code": "SBY-008", "address": "Hub: Surabaya Raya", "area": "Area 2 – Isa Yuhani"}, {"id": 16, "name": "Gayung Sari", "code": "SBY-009", "address": "Hub: Surabaya Raya", "area": "Area 3 – Rosyat Ely Delia"}, {"id": 17, "name": "Rungkut", "code": "SBY-010", "address": "Hub: Surabaya Raya", "area": "Area 3 – Rosyat Ely Delia"}, {"id": 18, "name": "Rungkut Tengah", "code": "SBY-011", "address": "Hub: Surabaya Raya", "area": "Area 3 – Rosyat Ely Delia"}, {"id": 19, "name": "Tropodo - Sidoarjo", "code": "SBY-012", "address": "Hub: Surabaya Raya", "area": "Area 3 – Rosyat Ely Delia"}, {"id": 20, "name": "Deltasari - Sidoarjo", "code": "SBY-013", "address": "Hub: Surabaya Raya", "area": "Area 3 – Rosyat Ely Delia"}, {"id": 21, "name": "Wage", "code": "SBY-014", "address": "Hub: Surabaya Raya", "area": "Area 3 – Rosyat Ely Delia"}, {"id": 22, "name": "Darmo Permai", "code": "SBY-015", "address": "Hub: Surabaya Raya", "area": "Area 3 – Rosyat Ely Delia"}, {"id": 23, "name": "Manukan", "code": "SBY-016", "address": "Hub: Surabaya Raya", "area": "Area 3 – Rosyat Ely Delia"}, {"id": 24, "name": "Perak", "code": "SBY-017", "address": "Hub: Surabaya Raya", "area": "Area 4 – Masita Krismi Adianty"}, {"id": 25, "name": "Kapas Krampung", "code": "SBY-018", "address": "Hub: Surabaya Raya", "area": "Area 4 – Masita Krismi Adianty"}, {"id": 26, "name": "Iskandar Muda", "code": "SBY-019", "address": "Hub: Surabaya Raya", "area": "Area 4 – Masita Krismi Adianty"}, {"id": 27, "name": "Kedung Cowek", "code": "SBY-020", "address": "Hub: Surabaya Raya", "area": "Area 4 – Masita Krismi Adianty"}, {"id": 28, "name": "Mulyosari", "code": "SBY-021", "address": "Hub: Surabaya Raya", "area": "Area 4 – Masita Krismi Adianty"}, {"id": 29, "name": "Demak", "code": "SBY-022", "address": "Hub: Surabaya Raya", "area": "Area 4 – Masita Krismi Adianty"}, {"id": 30, "name": "Gresik Kota Baru", "code": "SBY-023", "address": "Hub: Surabaya Raya", "area": "Area 4 – Masita Krismi Adianty"}, {"id": 31, "name": "Panglima Sudirman - Gresik", "code": "SBY-024", "address": "Hub: Surabaya Raya", "area": "Area 4 – Masita Krismi Adianty"}, {"id": 32, "name": "Bangkalan - Madura", "code": "MDR-001", "address": "Hub: Madura", "area": "Area 4 – Masita Krismi Adianty"}, {"id": 33, "name": "Krian - Sidoarjo", "code": "SBY-025", "address": "Hub: Surabaya Raya", "area": "Area 5 – Ita Tri Handaynie"}, {"id": 34, "name": "Sepanjang - Sidoarjo", "code": "SBY-026", "address": "Hub: Surabaya Raya", "area": "Area 5 – Ita Tri Handaynie"}, {"id": 35, "name": "Dukuh Kupang", "code": "SBY-027", "address": "Hub: Surabaya Raya", "area": "Area 5 – Ita Tri Handaynie"}, {"id": 36, "name": "Diponegoro - Sidoarjo", "code": "SBY-028", "address": "Hub: Surabaya Raya", "area": "Area 5 – Ita Tri Handaynie"}, {"id": 37, "name": "Cemengkalang", "code": "SBY-029", "address": "Hub: Surabaya Raya", "area": "Area 5 – Ita Tri Handaynie"}, {"id": 38, "name": "Sukodono", "code": "SBY-030", "address": "Hub: Surabaya Raya", "area": "Area 5 – Ita Tri Handaynie"}, {"id": 39, "name": "Candi - Sidoarjo", "code": "SBY-031", "address": "Hub: Surabaya Raya", "area": "Area 5 – Ita Tri Handaynie"}, {"id": 40, "name": "Tanggulangin", "code": "SBY-032", "address": "Hub: Surabaya Raya", "area": "Area 5 – Ita Tri Handaynie"}];
+            const defaultCoordinators = [{"id": 1, "name": "Agus Budi Prayitno", "area": "Tangerang", "phone": "", "stores": [1, 2, 3, 4, 5, 6, 7]}, {"id": 2, "name": "Isa Yuhani", "area": "Surabaya Raya", "phone": "", "stores": [8, 9, 10, 11, 12, 13, 14, 15]}, {"id": 3, "name": "Rosyat Ely Delia", "area": "Surabaya Raya", "phone": "", "stores": [16, 17, 18, 19, 20, 21, 22, 23]}, {"id": 4, "name": "Masita Krismi Adianty", "area": "Surabaya Raya", "phone": "", "stores": [24, 25, 26, 27, 28, 29, 30, 31, 32]}, {"id": 5, "name": "Ita Tri Handaynie", "area": "Surabaya Raya", "phone": "", "stores": [33, 34, 35, 36, 37, 38, 39, 40]}];
+            
+            tasks = JSON.parse(localStorage.getItem('laritta_tasks')) || [];
+            coordinators = JSON.parse(localStorage.getItem('laritta_coordinators')) || defaultCoordinators;
+            stores = JSON.parse(localStorage.getItem('laritta_stores')) || defaultStores;
+            
+            // Save to localStorage if not exist
+            if (!localStorage.getItem('laritta_coordinators')) {
+                localStorage.setItem('laritta_coordinators', JSON.stringify(defaultCoordinators));
+            }
+            if (!localStorage.getItem('laritta_stores')) {
+                localStorage.setItem('laritta_stores', JSON.stringify(defaultStores));
+            }
+            
+            // Populate coordinator dropdown
+            const select = document.getElementById('coordinatorSelect');
+            select.innerHTML = '<option value="">-- Pilih Nama Anda --</option>';
+            coordinators.forEach(coord => {
+                const option = document.createElement('option');
+                option.value = coord.id;
+                option.textContent = `${coord.name}`;
+                select.appendChild(option);
+            });
+        }
+
+        function login() {
+            const coordId = parseInt(document.getElementById('coordinatorSelect').value);
+            if (!coordId) {
+                alert('Silakan pilih nama Anda terlebih dahulu!');
+                return;
+            }
+
+            currentCoordinator = coordinators.find(c => c.id === coordId);
+            if (!currentCoordinator) {
+                alert('Koordinator tidak ditemukan!');
+                return;
+            }
+
+            // Save login session
+            localStorage.setItem('current_coordinator', coordId);
+
+            // Show main section
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('mainSection').classList.remove('hidden');
+
+            // Update welcome message
+            document.getElementById('welcomeName').textContent = `Halo, ${currentCoordinator.name}! 👋`;
+            document.getElementById('welcomeArea').textContent = `Area: ${currentCoordinator.area}`;
+            
+            const storeCount = currentCoordinator.stores ? currentCoordinator.stores.length : 0;
+            document.getElementById('welcomeStores').textContent = `Anda mengelola ${storeCount} toko`;
+
+            // Render tasks
+            renderTasks();
+        }
+
+        function logout() {
+            localStorage.removeItem('current_coordinator');
+            currentCoordinator = null;
+            document.getElementById('loginSection').classList.remove('hidden');
+            document.getElementById('mainSection').classList.add('hidden');
+            document.getElementById('coordinatorSelect').value = '';
+        }
+
+        function switchTab(tab) {
+            if (tab === 'active') {
+                document.getElementById('activeTasksTab').classList.remove('hidden');
+                document.getElementById('historyTab').classList.add('hidden');
+                document.getElementById('tabActive').classList.add('active');
+                document.getElementById('tabHistory').classList.remove('active');
+            } else {
+                document.getElementById('activeTasksTab').classList.add('hidden');
+                document.getElementById('historyTab').classList.remove('hidden');
+                document.getElementById('tabActive').classList.remove('active');
+                document.getElementById('tabHistory').classList.add('active');
+                renderHistory();
+            }
+        }
+
+        function renderHistory() {
+            const container = document.getElementById('historyList');
+            
+            // Filter completed tasks for current coordinator
+            const myCompletedTasks = tasks.filter(task => 
+                task.coordinators.some(c => c.id === currentCoordinator.id)
+            ).filter(task => {
+                // Check if this coordinator completed all their stores
+                const myStores = stores.filter(s => 
+                    currentCoordinator.stores && currentCoordinator.stores.includes(s.id)
+                );
+
+                let allMyStoresChecked = true;
+                for (let store of myStores) {
+                    const key = `task_${task.id}_coord_${currentCoordinator.id}_store_${store.id}`;
+                    if (localStorage.getItem(key) !== 'true') {
+                        allMyStoresChecked = false;
+                        break;
+                    }
+                }
+                return allMyStoresChecked && myStores.length > 0;
+            });
+
+            if (myCompletedTasks.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📚</div>
+                        <div class="empty-state-text">Belum ada riwayat tugas selesai</div>
+                        <p style="margin-top: 8px; font-size: 14px;">Tugas yang sudah selesai akan muncul di sini</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = myCompletedTasks.map(task => {
+                const myStores = stores.filter(s => 
+                    currentCoordinator.stores && currentCoordinator.stores.includes(s.id)
+                );
+
+                const myCoordData = task.coordinators.find(c => c.id === currentCoordinator.id);
+
+                return `
+                    <div class="task-card" style="border-color: var(--success); background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);">
+                        <div class="task-header">
+                            <div class="task-title">${task.title}</div>
+                            <div class="task-meta">
+                                <span class="badge badge-progress complete">✅ Selesai</span>
+                                <span class="badge badge-deadline">📅 ${formatDate(task.deadline)}</span>
+                                ${task.category ? `<span class="badge badge-category">${task.category}</span>` : ''}
+                            </div>
+                        </div>
+
+                        ${task.description ? `<div class="task-description">${task.description}</div>` : ''}
+
+                        <div style="background: white; padding: 16px; border-radius: 12px; margin-top: 16px;">
+                            <div style="font-weight: 700; font-size: 15px; color: var(--success); margin-bottom: 12px;">
+                                ✓ Diselesaikan: ${formatDateTime(myCoordData.checkedAt)}
+                            </div>
+                            <div style="font-weight: 600; font-size: 14px; color: var(--text-gray); margin-bottom: 8px;">
+                                🏪 Toko yang Sudah Dicek (${myStores.length})
+                            </div>
+                            ${myStores.map(store => {
+                                const storeCheckKey = `task_${task.id}_coord_${currentCoordinator.id}_store_${store.id}`;
+                                const storeCheckTime = localStorage.getItem(storeCheckKey + '_time');
+                                
+                                return `
+                                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--bg-light); border-radius: 8px; margin: 4px 0;">
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="background: var(--success); color: white; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;">
+                                                ${store.code}
+                                            </span>
+                                            <span style="font-size: 13px; font-weight: 600;">${store.name}</span>
+                                        </div>
+                                        <span style="font-size: 11px; color: var(--success);">✓ ${formatDateTime(storeCheckTime)}</span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderTasks() {
+            const container = document.getElementById('taskList');
+            
+            // Filter tasks for current coordinator
+            const myTasks = tasks.filter(task => 
+                task.status === 'active' && 
+                task.coordinators.some(c => c.id === currentCoordinator.id)
+            );
+
+            if (myTasks.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📋</div>
+                        <div class="empty-state-text">Belum ada tugas untuk Anda</div>
+                        <p style="margin-top: 8px; font-size: 14px;">Tugas baru akan muncul di sini</p>
+                    </div>
+                `;
+                updateStats();
+                return;
+            }
+
+            container.innerHTML = myTasks.map(task => {
+                // Get my stores for this task
+                const myStores = stores.filter(s => 
+                    currentCoordinator.stores && currentCoordinator.stores.includes(s.id)
+                );
+
+                // Calculate progress per store
+                let completedStores = 0;
+                myStores.forEach(store => {
+                    const storeCheckKey = `task_${task.id}_coord_${currentCoordinator.id}_store_${store.id}`;
+                    if (localStorage.getItem(storeCheckKey) === 'true') {
+                        completedStores++;
+                    }
+                });
+
+                const allStoresChecked = completedStores === myStores.length && myStores.length > 0;
+
+                const daysLeft = Math.ceil((new Date(task.deadline) - new Date()) / (1000 * 60 * 60 * 24));
+                const isOverdue = daysLeft < 0;
+
+                return `
+                    <div class="task-card">
+                        <div class="task-header">
+                            <div class="task-title">${task.title}</div>
+                            <div class="task-meta">
+                                <span class="badge badge-priority">${task.priority}</span>
+                                <span class="badge badge-deadline">
+                                    ⏰ ${formatDate(task.deadline)}
+                                    ${isOverdue ? ' - TERLAMBAT!' : ` (${daysLeft} hari lagi)`}
+                                </span>
+                                ${task.category ? `<span class="badge badge-category">${task.category}</span>` : ''}
+                                <span class="badge badge-progress ${allStoresChecked ? 'complete' : ''}">
+                                    ${completedStores}/${myStores.length} Toko
+                                </span>
+                            </div>
+                        </div>
+
+                        ${task.description ? `<div class="task-description">${task.description}</div>` : ''}
+
+                        <div class="store-list">
+                            <div class="store-list-header">
+                                <span>🏪 Checklist Toko Satu per Satu</span>
+                                <span class="progress-text">${completedStores}/${myStores.length}</span>
+                            </div>
+                            ${myStores.map(store => {
+                                const storeCheckKey = `task_${task.id}_coord_${currentCoordinator.id}_store_${store.id}`;
+                                const storeChecked = localStorage.getItem(storeCheckKey) === 'true';
+                                const storeCheckTime = localStorage.getItem(storeCheckKey + '_time');
+                                
+                                return `
+                                    <div class="store-item ${storeChecked ? 'checked' : ''}">
+                                        <div class="store-info">
+                                            <span class="store-code">${store.code}</span>
+                                            <div>
+                                                <div class="store-name">${store.name}</div>
+                                                ${storeChecked && storeCheckTime ? `<div class="completion-time">✓ Dicek: ${formatDateTime(storeCheckTime)}</div>` : ''}
+                                            </div>
+                                        </div>
+                                        <div class="check-button ${storeChecked ? 'checked' : ''}" 
+                                             onclick="toggleStoreCheck(${task.id}, ${store.id})"
+                                             title="${storeChecked ? 'Klik untuk uncheck' : 'Klik setelah dicek toko ini'}">
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            updateStats();
+        }
+
+        function toggleStoreCheck(taskId, storeId) {
+            const storeCheckKey = `task_${taskId}_coord_${currentCoordinator.id}_store_${storeId}`;
+            const currentStatus = localStorage.getItem(storeCheckKey) === 'true';
+            
+            // Toggle status
+            const newStatus = !currentStatus;
+            localStorage.setItem(storeCheckKey, newStatus.toString());
+            
+            if (newStatus) {
+                localStorage.setItem(storeCheckKey + '_time', new Date().toISOString());
+                showNotification('✅ Toko berhasil dicek!');
+            } else {
+                localStorage.removeItem(storeCheckKey + '_time');
+                showNotification('⚠️ Checklist dibatalkan');
+            }
+
+            // Check if all stores are checked for this coordinator in this task
+            const task = tasks.find(t => t.id === taskId);
+            if (task) {
+                const myStores = stores.filter(s => 
+                    currentCoordinator.stores && currentCoordinator.stores.includes(s.id)
+                );
+
+                let allMyStoresChecked = true;
+                for (let store of myStores) {
+                    const key = `task_${taskId}_coord_${currentCoordinator.id}_store_${store.id}`;
+                    if (localStorage.getItem(key) !== 'true') {
+                        allMyStoresChecked = false;
+                        break;
+                    }
+                }
+
+                // Update task coordinator status
+                const myCoordData = task.coordinators.find(c => c.id === currentCoordinator.id);
+                if (myCoordData) {
+                    myCoordData.checked = allMyStoresChecked;
+                    myCoordData.checkedAt = allMyStoresChecked ? new Date().toISOString() : null;
+
+                    // Check if ALL coordinators completed
+                    const allCoordsCompleted = task.coordinators.every(c => c.checked);
+                    if (allCoordsCompleted) {
+                        task.status = 'completed';
+                        task.completedAt = new Date().toISOString();
+                    } else {
+                        task.status = 'active';
+                    }
+
+                    // Save task updates
+                    localStorage.setItem('laritta_tasks', JSON.stringify(tasks));
+                }
+            }
+
+            // Re-render
+            renderTasks();
+        }
+
+        function updateStats() {
+            const myTasks = tasks.filter(task => 
+                task.status === 'active' && 
+                task.coordinators.some(c => c.id === currentCoordinator.id)
+            );
+
+            let completed = 0;
+            myTasks.forEach(task => {
+                const myStores = stores.filter(s => 
+                    currentCoordinator.stores && currentCoordinator.stores.includes(s.id)
+                );
+
+                let allChecked = true;
+                for (let store of myStores) {
+                    const key = `task_${task.id}_coord_${currentCoordinator.id}_store_${store.id}`;
+                    if (localStorage.getItem(key) !== 'true') {
+                        allChecked = false;
+                        break;
+                    }
+                }
+
+                if (allChecked && myStores.length > 0) {
+                    completed++;
+                }
+            });
+
+            const pending = myTasks.length - completed;
+
+            document.getElementById('totalTasksCount').textContent = myTasks.length;
+            document.getElementById('completedCount').textContent = completed;
+            document.getElementById('pendingCount').textContent = pending;
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--success);
+                color: white;
+                padding: 16px 24px;
+                border-radius: 12px;
+                box-shadow: var(--shadow-lg);
+                font-weight: 600;
+                z-index: 1000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 2000);
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return date.toLocaleDateString('id-ID', options);
+        }
+
+        function formatDateTime(dateStr) {
+            if (!dateStr) return '';
+            const date = new Date(dateStr);
+            const options = { 
+                day: 'numeric',
+                month: 'short',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            return date.toLocaleDateString('id-ID', options);
+        }
+
+        // Check for existing session
+        function checkSession() {
+            const savedCoordId = localStorage.getItem('current_coordinator');
+            if (savedCoordId) {
+                document.getElementById('coordinatorSelect').value = savedCoordId;
+                login();
+            }
+        }
+
+        // Initialize
+        window.onload = function() {
+            loadData();
+            checkSession();
+        };
+
+        // Add CSS animation for notification
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
