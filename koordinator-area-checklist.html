@@ -879,17 +879,372 @@
         const STORE_KEY = 'laritta_stores';
 
         // Initialize default stores
-        let stores = JSON.parse(localStorage.getItem(STORE_KEY)) || [];
+        let stores = JSON.parse(localStorage.getItem(STORE_KEY)) || [
+        {
+                "id": 1,
+                "name": "Borobudur - Tangerang",
+                "code": "TNG-001",
+                "address": "Hub: Tangerang",
+                "area": "Area 1 – Agus Budi Prayitno"
+        },
+        {
+                "id": 2,
+                "name": "Merdeka - Tangerang",
+                "code": "TNG-002",
+                "address": "Hub: Tangerang",
+                "area": "Area 1 – Agus Budi Prayitno"
+        },
+        {
+                "id": 3,
+                "name": "Halim - Tangerang",
+                "code": "TNG-003",
+                "address": "Hub: Tangerang",
+                "area": "Area 1 – Agus Budi Prayitno"
+        },
+        {
+                "id": 4,
+                "name": "Poris - Tangerang",
+                "code": "TNG-004",
+                "address": "Hub: Tangerang",
+                "area": "Area 1 – Agus Budi Prayitno"
+        },
+        {
+                "id": 5,
+                "name": "Ciledug - Tangerang",
+                "code": "TNG-005",
+                "address": "Hub: Tangerang",
+                "area": "Area 1 – Agus Budi Prayitno"
+        },
+        {
+                "id": 6,
+                "name": "Periuk - Tangerang",
+                "code": "TNG-006",
+                "address": "Hub: Tangerang",
+                "area": "Area 1 – Agus Budi Prayitno"
+        },
+        {
+                "id": 7,
+                "name": "Graha Raya - Tangerang",
+                "code": "TNG-007",
+                "address": "Hub: Tangerang",
+                "area": "Area 1 – Agus Budi Prayitno"
+        },
+        {
+                "id": 8,
+                "name": "Nias",
+                "code": "SBY-001",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 2 – Isa Yuhani"
+        },
+        {
+                "id": 9,
+                "name": "Darmahusada",
+                "code": "SBY-002",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 2 – Isa Yuhani"
+        },
+        {
+                "id": 10,
+                "name": "Kutai",
+                "code": "SBY-003",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 2 – Isa Yuhani"
+        },
+        {
+                "id": 11,
+                "name": "Barata",
+                "code": "SBY-004",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 2 – Isa Yuhani"
+        },
+        {
+                "id": 12,
+                "name": "Ketintang",
+                "code": "SBY-005",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 2 – Isa Yuhani"
+        },
+        {
+                "id": 13,
+                "name": "Menganti - Gresik",
+                "code": "SBY-006",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 2 – Isa Yuhani"
+        },
+        {
+                "id": 14,
+                "name": "Wiyung",
+                "code": "SBY-007",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 2 – Isa Yuhani"
+        },
+        {
+                "id": 15,
+                "name": "ST.Gubeng",
+                "code": "SBY-008",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 2 – Isa Yuhani"
+        },
+        {
+                "id": 16,
+                "name": "Gayung Sari",
+                "code": "SBY-009",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 3 – Rosyat Ely Delia"
+        },
+        {
+                "id": 17,
+                "name": "Rungkut",
+                "code": "SBY-010",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 3 – Rosyat Ely Delia"
+        },
+        {
+                "id": 18,
+                "name": "Rungkut Tengah",
+                "code": "SBY-011",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 3 – Rosyat Ely Delia"
+        },
+        {
+                "id": 19,
+                "name": "Tropodo - Sidoarjo",
+                "code": "SBY-012",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 3 – Rosyat Ely Delia"
+        },
+        {
+                "id": 20,
+                "name": "Deltasari - Sidoarjo",
+                "code": "SBY-013",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 3 – Rosyat Ely Delia"
+        },
+        {
+                "id": 21,
+                "name": "Wage",
+                "code": "SBY-014",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 3 – Rosyat Ely Delia"
+        },
+        {
+                "id": 22,
+                "name": "Darmo Permai",
+                "code": "SBY-015",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 3 – Rosyat Ely Delia"
+        },
+        {
+                "id": 23,
+                "name": "Manukan",
+                "code": "SBY-016",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 3 – Rosyat Ely Delia"
+        },
+        {
+                "id": 24,
+                "name": "Perak",
+                "code": "SBY-017",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 4 – Masita Krismi Adianty"
+        },
+        {
+                "id": 25,
+                "name": "Kapas Krampung",
+                "code": "SBY-018",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 4 – Masita Krismi Adianty"
+        },
+        {
+                "id": 26,
+                "name": "Iskandar Muda",
+                "code": "SBY-019",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 4 – Masita Krismi Adianty"
+        },
+        {
+                "id": 27,
+                "name": "Kedung Cowek",
+                "code": "SBY-020",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 4 – Masita Krismi Adianty"
+        },
+        {
+                "id": 28,
+                "name": "Mulyosari",
+                "code": "SBY-021",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 4 – Masita Krismi Adianty"
+        },
+        {
+                "id": 29,
+                "name": "Demak",
+                "code": "SBY-022",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 4 – Masita Krismi Adianty"
+        },
+        {
+                "id": 30,
+                "name": "Gresik Kota Baru",
+                "code": "SBY-023",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 4 – Masita Krismi Adianty"
+        },
+        {
+                "id": 31,
+                "name": "Panglima Sudirman - Gresik",
+                "code": "SBY-024",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 4 – Masita Krismi Adianty"
+        },
+        {
+                "id": 32,
+                "name": "Bangkalan - Madura",
+                "code": "MDR-001",
+                "address": "Hub: Madura",
+                "area": "Area 4 – Masita Krismi Adianty"
+        },
+        {
+                "id": 33,
+                "name": "Krian - Sidoarjo",
+                "code": "SBY-025",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 5 – Ita Tri Handaynie"
+        },
+        {
+                "id": 34,
+                "name": "Sepanjang - Sidoarjo",
+                "code": "SBY-026",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 5 – Ita Tri Handaynie"
+        },
+        {
+                "id": 35,
+                "name": "Dukuh Kupang",
+                "code": "SBY-027",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 5 – Ita Tri Handaynie"
+        },
+        {
+                "id": 36,
+                "name": "Diponegoro - Sidoarjo",
+                "code": "SBY-028",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 5 – Ita Tri Handaynie"
+        },
+        {
+                "id": 37,
+                "name": "Cemengkalang",
+                "code": "SBY-029",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 5 – Ita Tri Handaynie"
+        },
+        {
+                "id": 38,
+                "name": "Sukodono",
+                "code": "SBY-030",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 5 – Ita Tri Handaynie"
+        },
+        {
+                "id": 39,
+                "name": "Candi - Sidoarjo",
+                "code": "SBY-031",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 5 – Ita Tri Handaynie"
+        },
+        {
+                "id": 40,
+                "name": "Tanggulangin",
+                "code": "SBY-032",
+                "address": "Hub: Surabaya Raya",
+                "area": "Area 5 – Ita Tri Handaynie"
+        }
+];
 
         // Initialize default coordinators
         let coordinators = JSON.parse(localStorage.getItem(COORDINATOR_KEY)) || [
-            { id: 1, name: "Koordinator Area 1", area: "Surabaya", phone: "", stores: [] },
-            { id: 2, name: "Koordinator Area 2", area: "Sidoarjo", phone: "", stores: [] },
-            { id: 3, name: "Koordinator Area 3", area: "Gresik", phone: "", stores: [] },
-            { id: 4, name: "Koordinator Area 4", area: "Tangerang", phone: "", stores: [] },
-            { id: 5, name: "Koordinator Area 5", area: "Madura", phone: "", stores: [] },
-            { id: 6, name: "Koordinator Area 6", area: "Mixed Areas", phone: "", stores: [] }
-        ];
+        {
+                "id": 1,
+                "name": "Agus Budi Prayitno",
+                "area": "Tangerang",
+                "phone": "",
+                "stores": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7
+                ]
+        },
+        {
+                "id": 2,
+                "name": "Isa Yuhani",
+                "area": "Surabaya Raya",
+                "phone": "",
+                "stores": [
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15
+                ]
+        },
+        {
+                "id": 3,
+                "name": "Rosyat Ely Delia",
+                "area": "Surabaya Raya",
+                "phone": "",
+                "stores": [
+                        16,
+                        17,
+                        18,
+                        19,
+                        20,
+                        21,
+                        22,
+                        23
+                ]
+        },
+        {
+                "id": 4,
+                "name": "Masita Krismi Adianty",
+                "area": "Surabaya Raya",
+                "phone": "",
+                "stores": [
+                        24,
+                        25,
+                        26,
+                        27,
+                        28,
+                        29,
+                        30,
+                        31,
+                        32
+                ]
+        },
+        {
+                "id": 5,
+                "name": "Ita Tri Handaynie",
+                "area": "Surabaya Raya",
+                "phone": "",
+                "stores": [
+                        33,
+                        34,
+                        35,
+                        36,
+                        37,
+                        38,
+                        39,
+                        40
+                ]
+        }
+];
 
         let categories = JSON.parse(localStorage.getItem(CATEGORY_KEY)) || [
             "Audio/Visual", "Display", "Promo", "Inventory", "Maintenance", "Training", "Report", "Lainnya"
